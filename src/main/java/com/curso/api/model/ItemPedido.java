@@ -2,50 +2,55 @@ package com.curso.api.model;
 
 import java.util.Objects;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "cliente")
-public class Cliente {
+public class ItemPedido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotNull
 	private Long id;
-	
-	public Cliente(@NotNull Long id, String nome) {
+	private Pedido pedido;
+	private Produto produto;
+	private Integer quantidade;
+	public ItemPedido(@NotNull Long id, Pedido pedido, Produto produto, Integer quantidade) {
 		super();
 		this.id = id;
-		this.nome = nome;
+		this.pedido = pedido;
+		this.produto = produto;
+		this.quantidade = quantidade;
 	}
-
-	private String nome;
-
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getNome() {
-		return nome;
+	public Pedido getPedido() {
+		return pedido;
 	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+	public Produto getProduto() {
+		return produto;
+	}
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
 	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -54,7 +59,8 @@ public class Cliente {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cliente other = (Cliente) obj;
+		ItemPedido other = (ItemPedido) obj;
 		return Objects.equals(id, other.id);
 	}
+	
 }
